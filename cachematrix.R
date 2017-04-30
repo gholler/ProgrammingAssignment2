@@ -26,10 +26,12 @@ makeCacheMatrix <- function(M = matrix()) {
 ## for successive calls with the same cached matrix. 
 ##
 ## parameter 'cacheMatrix' is the cached matrix to inverse (built from a previous call to makeCache)
-## Returns a matrix that is the inverse of M
+## Returns a matrix that is the inverse of cacheMatrix$getMatrix()
 cacheSolve <- function(cacheMatrix, ...) {
+    # check in cache first
      M_1 <- cacheMatrix$getInverseMatrix()
      if (is.null(M_1)){
+         # first time : cache the result
          M_1 <- solve(M, ...) 
          cacheMatrix$setInverseMatrix(M_1)
      }
